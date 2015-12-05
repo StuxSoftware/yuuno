@@ -5,7 +5,7 @@ Yuuno FX.
 
 Taking KaraTemplater to it's logical conclusion.
 """
-from typing import AnyStr, Optional
+from typing import AnyStr, Optional, List
 
 from yuuno.parser import Document, Dialogue
 
@@ -15,7 +15,12 @@ class Environment(object):
     Base-Class for environment.
     """
 
-    def main(self, environment) -> None:
+    def log(self, message) -> None:
+        """
+        Log the given message.
+        """
+
+    def main(self, parser) -> None:
         """
         Represents the main function for this environment. It is a callback
         to signal the script that the script is ready for rendering.
@@ -36,6 +41,12 @@ class Environment(object):
         :param line: The line to dump
         """
         pass
+
+    def get_processors(self) -> List[Callable[[Document, Namespace], None]]:
+        """
+        Returns the default processors of this environment.
+        """
+        return []
 
 
 _environment = None
