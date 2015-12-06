@@ -5,6 +5,7 @@ Yuuno FX.
 
 Taking KaraTemplater to it's logical conclusion.
 """
+from yuuno.processing.core import DocumentParser
 from yuuno.environment import get_environment, Environment
 from yuuno.namespace import Namespace
 
@@ -20,6 +21,7 @@ class Templater(object):
         self.root = Namespace()
         self.functions = []
         self._processors = None
+        self.parser = DocumentParser()
 
     @property
     def processors(self):
@@ -49,6 +51,12 @@ class Templater(object):
         :param namespace: The namespace.
         :param name:      The internal id
         """
+        if name is not None:
+            setattr(namespace, name, Namespace())
+            namespace = getattr(namespace, name)
+
+        doc = self.environment.get_data(file)
+        self.parser.on_new_document(namespace, doc)
 
     def run(self):
         ns = Namespace(self.root)

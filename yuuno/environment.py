@@ -6,8 +6,9 @@ Yuuno FX.
 Taking KaraTemplater to it's logical conclusion.
 """
 import collections
-from typing import AnyStr, Optional, List
+from typing import AnyStr, Optional, List, Callable
 
+from yuuno.namespace import Namespace
 from yuuno.parser import Document, Dialogue, Style
 
 
@@ -52,7 +53,7 @@ class Environment(object):
         """
         return []
 
-    def text_extents(self, string: AnyStr, style: Style) -> TextExtents:
+    def text_extents(self, string: AnyStr, style: Style) -> TextExtent:
         """
         Returns the text extents.
         """

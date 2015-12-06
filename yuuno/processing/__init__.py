@@ -5,5 +5,3 @@ Yuuno FX.
 
 Taking KaraTemplater to it's logical conclusion.
 """
-
-
