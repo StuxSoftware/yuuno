@@ -5,9 +5,13 @@ Yuuno FX.
 
 Taking KaraTemplater to it's logical conclusion.
 """
+import collections
 from typing import AnyStr, Optional, List
 
-from yuuno.parser import Document, Dialogue
+from yuuno.parser import Document, Dialogue, Style
+
+
+TextExtent = collections.namedtuple("TextExtent", "width height descent extlead")
 
 
 class Environment(object):
@@ -48,6 +52,11 @@ class Environment(object):
         """
         return []
 
+    def text_extents(self, string: AnyStr, style: Style) -> TextExtents:
+        """
+        Returns the text extents.
+        """
+        return TextExtents(0, 0, 0, 0)
 
 _environment = None
 def set_environment(environment):

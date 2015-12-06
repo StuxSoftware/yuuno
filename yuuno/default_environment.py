@@ -8,6 +8,7 @@ Taking KaraTemplater to it's logical conclusion.
 """
 import io
 import os, sys
+import platform
 
 import docopt
 
@@ -17,6 +18,14 @@ from yuuno.templater import Templater
 
 
 PROGNAME=os.path.dirname(sys.argv[0])
+
+
+if platform.platform().startswith("Windows"):
+    # We are assuming we use the windows GDI+ API for our text measurements.
+    from yuuno.drivers.windows import textextents
+else:
+    # We use gobject for our text measurements.
+    from yuuno.drivers.gobject import textextents
 
 
 class DefaultEnvironment(Environment):
@@ -93,3 +102,6 @@ Options
 
     def dump(self, line):
         self.output.events.append(line)
+
+    def text_extents(self, string, style):
+        return text_extents(string, style)
