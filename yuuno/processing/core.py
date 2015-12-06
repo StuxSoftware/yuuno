@@ -35,7 +35,7 @@ class DocumentParser(object):
         self.parser = parser
         self.manager = EventManager()
         self.processors = {}
-        # on_new_document(Namespace, Parser)
+        # on_new_document(Namespace, Document)
         self.on_new_document = self.manager.create("new_document")
 
     def get_processor(self, cls):
